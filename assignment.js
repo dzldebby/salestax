@@ -73,25 +73,28 @@ function calTotalPrice(exemptBasicTax, isImported, price, qty){
     return (totalprice.toFixed(2));
 }
 
-var totalcartprice, totaloriginalprice;
-totalcartprice = totaloriginalprice = 0;
-totalnewitemprice = [];
-allitems = [];
-exempted = [];
-imported = [];
 
-for (var i=0; i< items.length; i++){
-    checkTaxes(items[i].item_name);
-    totaloriginalprice += parseFloat(items[i].item_price * items[i].item_qty);
-    totalnewitemprice.push(calTotalPrice(exemptBasicTax, isImported, items[i].item_price, items[i].item_qty))
-    totalcartprice += parseFloat(calTotalPrice(exemptBasicTax, isImported, items[i].item_price, items[i].item_qty));
-    salestax = (totalcartprice - totaloriginalprice).toFixed(2);
-    lineitem1 = items[i].item_qty + " "+ items[i].item_name + ": " +  totalnewitemprice[i];
-    allitems.push(lineitem1);
-}
 
 
 function receipt(){
+
+    var totalcartprice, totaloriginalprice;
+    totalcartprice = totaloriginalprice = 0;
+    totalnewitemprice = [];
+    allitems = [];
+    exempted = [];
+    imported = [];
+
+    for (var i=0; i< items.length; i++){
+        checkTaxes(items[i].item_name);
+        totaloriginalprice += parseFloat(items[i].item_price * items[i].item_qty);
+        totalnewitemprice.push(calTotalPrice(exemptBasicTax, isImported, items[i].item_price, items[i].item_qty))
+        totalcartprice += parseFloat(calTotalPrice(exemptBasicTax, isImported, items[i].item_price, items[i].item_qty));
+        salestax = (totalcartprice - totaloriginalprice).toFixed(2);
+        lineitem1 = items[i].item_qty + " "+ items[i].item_name + ": " +  totalnewitemprice[i];
+        allitems.push(lineitem1);
+    }
+
     return `${allitems.join("\n")}\nSales Tax: ${salestax}\nTotal: ${totalcartprice.toFixed(2)}`;
 }
 
