@@ -1,0 +1,25 @@
+{
+  "name": "salestax",
+  "version": "1.0.0",
+  "description": "",
+  "main": "assignment.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dzldebby/salestax.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dzldebby/salestax/issues"
+  },
+  "homepage": "https://github.com/dzldebby/salestax#readme",
+  "devDependencies": {
+    "jest": "^27.3.1"
+  },
+  "dependencies": {
+    "prompt-sync": "^4.2.0"
+  }
+}

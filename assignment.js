@@ -1,35 +1,36 @@
-var text = 
-"2 book at 12.49 1 music CD at 14.99 1 chocolate bar at 0.85";
+// var text = 
+// "2 book at 12.49 1 music CD at 14.99 1 chocolate bar at 0.85";
 
-let regex = /\d+ [\w\s]* at \d+.\d{2}/g;
-let match;
-let matches = [];
+function parseText(text){
+    let regex = /\d+ [\w\s]* at \d+.\d{2}/g;
+    let match;
+    let matches = [];
 
-while (match = regex.exec(text)) {
-    matches.push(match)
+
+    while (match = regex.exec(text)) {
+        matches.push(match)
+    }
+
+    const productnames = [];
+    const qtys = [];
+    const prices = [];
+
+
+    for (var i=0; i< matches.length; i++){
+        item = matches[i][0];
+        text_split = item.split(/\s+/);
+        at_pos = (text_split.indexOf("at"));
+        price = parseFloat(text_split[text_split.length-1]);
+        prices.push(price);
+        qty = parseFloat(text_split[0]);
+        qtys.push(qty);
+        product_name = text_split.slice(1,at_pos).join(" ");
+        productnames.push(product_name);
+    }
+    
+    items = productnames.map( (s, i) => ({item_name : s, item_price : prices[i], item_qty : qtys[i]}) );
+    return items;
 }
-
-const productnames = [];
-const qtys = [];
-const prices = [];
-
-// parse to get the name, price and quantity of each line item in the string  
-
-for (var i=0; i< matches.length; i++){
-    item = matches[i][0];
-    text_split = item.split(/\s+/);
-    at_pos = (text_split.indexOf("at"));
-    price = parseFloat(text_split[text_split.length-1]);
-    prices.push(price);
-    qty = parseFloat(text_split[0]);
-    qtys.push(qty);
-    product_name = text_split.slice(1,at_pos).join(" ");
-    productnames.push(product_name);
-}
-
-// store name, price, and quantity into array of objects
-
-const items = productnames.map( (s, i) => ({item_name : s, item_price : prices[i], item_qty : qtys[i]}) );
 
 // function to check what taxes apply for the product 
 
@@ -75,9 +76,7 @@ function calTotalPrice(exemptBasicTax, isImported, price, qty){
 
 
 
-
-function receipt(){
-
+function receipt(items){
     var totalcartprice, totaloriginalprice;
     totalcartprice = totaloriginalprice = 0;
     totalnewitemprice = [];
@@ -96,7 +95,27 @@ function receipt(){
     }
 
     return `${allitems.join("\n")}\nSales Tax: ${salestax}\nTotal: ${totalcartprice.toFixed(2)}`;
+
 }
 
-console.log(receipt());
+
+function getinput(){
+    const prompt = require('prompt-sync')();
+    text = prompt('Enter items purchased: ');
+    return text;
+}
+
+
+function main(text){
+    parseText(text);
+    return receipt(items);
+}
+  
+
+
+// getinput();
+// console.log(main(text));
+
+exports.main = main;
+
 
