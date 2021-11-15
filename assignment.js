@@ -112,10 +112,8 @@ function main(text){
 }
   
 
-
-// getinput();
-// console.log(main(text));
-
 exports.main = main;
+exports.getinput = getinput;
+
 
 
