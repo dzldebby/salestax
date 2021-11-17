@@ -1,4 +1,4 @@
-const {main, getinput} = require('./assignment');
+const { getinput, returnReceipt} = require('./returnReceipt');
 
 getinput();
-console.log(main(text));
+console.log(returnReceipt(text));
