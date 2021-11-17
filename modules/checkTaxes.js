@@ -25,9 +25,5 @@ function checkTaxes(item){
 }
 
 
-// module.exports = { exemptBasicTax };
-
 exports.checkTaxes = checkTaxes;
 
-
-// module.exports = { isImported };

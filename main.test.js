@@ -1,4 +1,4 @@
-const {returnReceipt} = require('./returnReceipt');
+const {returnReceipt} = require('./modules/returnReceipt');
 
 describe('main', () => {
     it('should return first output answer', ()=> {

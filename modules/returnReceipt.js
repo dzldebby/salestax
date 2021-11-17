@@ -1,7 +1,7 @@
 
 const {parseText} = require('./parseText');
 const {receipt} = require('./receipt')
-const {getinput} = require('./getinput')
+const {getinput} = require('./getInput')
 
 
 function returnReceipt(text){
