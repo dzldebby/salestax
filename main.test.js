@@ -1,25 +1,31 @@
 const {returnReceipt} = require('./modules/returnReceipt');
+const {getinput} = require('./modules/getInput')
+const {parseText} = require('./modules/parseText')
+const {PriceCalculator} = require('./modules/PriceCalculator')
+const {ReceiptGenerator} = require('./modules/ReceiptGenerator')
+
+const {StoreItem} = require('./modules/StoreItem')
+
+
+itemArray = [];
+
+
+itemArray.push(new StoreItem('book', 12.49, 2));
+// itemArray.push(new StoreItem('music CD', 14.99, 1));
+// itemArray.push(new StoreItem('chocolate bar', 0.85, 1));
+
+
+var priceCalculator = new PriceCalculator();
+
+var receiptGenerator = new ReceiptGenerator(priceCalculator);
 
 describe('main', () => {
     it('should return first output answer', ()=> {
-        const result = returnReceipt('2 book at 12.49 1 music CD at 14.99 1 chocolate bar at 0.85');
-        expect(result).toBe('2 book: 24.98\n1 music CD: 16.49\n1 chocolate bar: 0.85\nSales Tax: 1.50\nTotal: 42.32');
+        const result = receiptGenerator.receipt(itemArray);
+        expect(result).toBe('2 book: 24.98\nSales Tax: 0.00\nTotal: 24.98');
     })
 })
 
-describe('returnReceipt', () => {
-    it('should return second output answer', ()=> {
-        const result = returnReceipt('1 imported box of chocolates at 10.00 1 imported bottle of perfume at 47.50');
-        expect(result).toBe('1 imported box of chocolates: 10.50\n1 imported bottle of perfume: 54.62\nSales Tax: 7.62\nTotal: 65.12');
-    })
-})
-
-describe('returnReceipt', () => {
-    it('should return third output answer', ()=> {
-        const result = returnReceipt('1 imported bottle of perfume at 27.99 1 bottle of perfume at 18.99 1 packet of headache pills at 9.75 3 box of imported chocolates at 11.25');
-        expect(result).toBe('1 imported bottle of perfume: 32.19\n1 bottle of perfume: 20.89\n1 packet of headache pills: 9.75\n3 box of imported chocolates: 35.44\nSales Tax: 7.79\nTotal: 98.27');
-    })
-})
 
 
 

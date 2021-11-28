@@ -1,6 +1,9 @@
 
+const { calTotalPrice } = require('./calTotalPrice');
 const {checkTaxes} = require('./checkTaxes');
-const {calTotalPrice} = require('./calTotalPrice');
+// const {priceCalculator} = require('./priceCalculator');
+
+
 
 function receipt(items){
     var totalcartprice, totaloriginalprice;
